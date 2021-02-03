@@ -37,3 +37,9 @@ variable "instance_type_replica" {
   type        = string
   default     = ""
 }
+
+variable "password" {
+  description = "Master DB password"
+  type        = string
+  default     = ""
+}

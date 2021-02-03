@@ -1,7 +1,7 @@
-provider "aws" {
-  region = "us-west-2"
-	profile= "QA-AUNA"
-}
+#provider "aws" {
+#  region = "us-west-2"
+#	profile= "QA-AUNA"
+#}
 
 ######################################
 # Data sources to get VPC and subnets
@@ -19,7 +19,9 @@ data "aws_vpc" "default" {
 # RDS Aurora
 #############
 module "aurora" {
-  source                          = "../../"
+#  source                          = "../../"
+  source                          = "terraform-aws-modules/rds-aurora/aws"
+  version = "~> 3.0"
 #  name                            = "aurora-example-postgresql"
   name                            = var.name
 #  engine                          = "aurora-postgresql"
