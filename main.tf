@@ -1,8 +1,3 @@
-#provider "aws" {
-#  region = "us-west-2"
-#	profile= "QA-AUNA"
-#}
-
 ######################################
 # Data sources to get VPC and subnets
 ######################################
@@ -21,10 +16,12 @@ data "aws_vpc" "default" {
 module "aurora" {
 #  source                          = "../../"
   source                          = "terraform-aws-modules/rds-aurora/aws"
-  version = "~> 3.0"
+  version = "~> 3.4.0"
 #  name                            = "aurora-example-postgresql"
   name                            = var.name
+#  environment                     = var.environment
 #  engine                          = "aurora-postgresql"
+  port                            = var.port
   engine                          = var.engine
 #  engine_version                  = "11.6"
   engine_version                  = var.engine_version
@@ -46,6 +43,7 @@ module "aurora" {
   #  enabled_cloudwatch_logs_exports = ["audit", "error", "general", "slowquery"]
 #  security_group_description = ""
   security_group_description = ""
+  tags = var.tags
 }
 
 resource "aws_db_parameter_group" "aurora_db_postgres11_parameter_group" {

@@ -15,6 +15,21 @@ variable "name" {
   type        = string
   default     = ""
 }
+variable "username" {
+  description = "Master DB username"
+  type        = string
+  default     = "root"
+}
+variable "password" {
+  description = "Master DB password"
+  type        = string
+  default     = ""
+}
+variable "port" {
+  description = "The port on which to accept connections"
+  type        = string
+  default     = ""
+}
 variable "engine" {
   description = "Aurora database engine type, currently aurora, aurora-mysql or aurora-postgresql"
   type        = string
@@ -25,7 +40,6 @@ variable "engine_version" {
   type        = string
   default     = "5.6.10a"
 }
-
 
 variable "instance_type" {
   description = "Instance type to use at master instance. If instance_type_replica is not set it will use the same type for replica instances"
@@ -38,8 +52,8 @@ variable "instance_type_replica" {
   default     = ""
 }
 
-variable "password" {
-  description = "Master DB password"
-  type        = string
-  default     = ""
+variable "tags" {
+  description = "A map of tags to add to all resources."
+  type        = map(string)
+  default     = {}
 }
