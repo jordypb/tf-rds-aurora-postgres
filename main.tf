@@ -8,6 +8,7 @@ data "aws_vpc" "default" {
 
 # data "aws_subnet_ids" "all" {
 #   vpc_id = data.aws_vpc.default.id
+#   ids = var.subnet_ids
 # }
 
 #############
@@ -19,6 +20,9 @@ module "aurora" {
   version = "~> 3.4.0"
 #  name                            = "aurora-example-postgresql"
   name                            = var.name
+#  name                            = "${var.name}-${var.environment}"
+  username                        = var.username
+#  database_name                   = "db${var.name}${var.environment}"
 #  environment                     = var.environment
 #  engine                          = "aurora-postgresql"
   port                            = var.port
@@ -27,9 +31,9 @@ module "aurora" {
   engine_version                  = var.engine_version
 #  subnets                         = data.aws_subnet_ids.all.ids           ####check this dont have subnets values
   subnets                         = var.subnet_ids
+#  subnets                         = data.aws_subnet_ids.all.ids
   vpc_id                          = data.aws_vpc.default.id
-#  replica_count                   = 2
-  replica_count                   = 2
+  replica_count                   = var.replica_count
 #  instance_type                   = "db.r4.large"
   instance_type                   = var.instance_type
 #  instance_type_replica           = "db.t3.medium"
@@ -47,15 +51,15 @@ module "aurora" {
 }
 
 resource "aws_db_parameter_group" "aurora_db_postgres11_parameter_group" {
-  name        = "test-aurora-db-postgres11-parameter-group"
+  name        = "aurora-db-postgres11-parameter-group-${var.environment}"
   family      = "aurora-postgresql11"
-  description = "test-aurora-db-postgres11-parameter-group"
+  description = "aurora-db-postgres11-parameter-group-${var.environment}"
 }
 
 resource "aws_rds_cluster_parameter_group" "aurora_cluster_postgres11_parameter_group" {
-  name        = "test-aurora-postgres11-cluster-parameter-group"
+  name        = "aurora-postgres11-cluster-parameter-group-${var.environment}"
   family      = "aurora-postgresql11"
-  description = "test-aurora-postgres11-cluster-parameter-group"
+  description = "aurora-postgres11-cluster-parameter-group-${var.environment}"
 }
 
 ############################

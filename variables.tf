@@ -18,7 +18,7 @@ variable "name" {
 variable "username" {
   description = "Master DB username"
   type        = string
-  default     = "root"
+  default     = ""
 }
 variable "password" {
   description = "Master DB password"
@@ -33,12 +33,12 @@ variable "port" {
 variable "engine" {
   description = "Aurora database engine type, currently aurora, aurora-mysql or aurora-postgresql"
   type        = string
-  default     = "aurora"
+  default     = ""
 }
 variable "engine_version" {
   description = "Aurora database engine version."
   type        = string
-  default     = "5.6.10a"
+  default     = ""
 }
 
 variable "instance_type" {
@@ -56,4 +56,14 @@ variable "tags" {
   description = "A map of tags to add to all resources."
   type        = map(string)
   default     = {}
+}
+variable "environment" {
+  description = "environment of deploy"
+  type        = string
+  default     = ""
+}
+variable "replica_count" {
+  description = "Number of reader nodes to create. ###If `replica_scale_enable` is `true`, the value of `replica_scale_min` is used instead."
+  type        = number
+  default     = 1  
 }
