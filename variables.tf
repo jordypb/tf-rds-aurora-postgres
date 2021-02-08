@@ -1,3 +1,9 @@
+variable "publicly_accessible" {
+  description = "Whether the DB should have a public IP address"
+  type        = bool
+  default     = false
+}
+
 variable "vpc_id" {
   description = "VPC ID"
   type        = string
@@ -20,10 +26,15 @@ variable "username" {
   type        = string
   default     = ""
 }
+variable "create_random_password" {
+  description = "Whether to create random password for RDS primary cluster"
+  type        = bool
+  default     = true
+}
 variable "password" {
   description = "Master DB password"
   type        = string
-  default     = ""
+#  default     = ""
 }
 variable "port" {
   description = "The port on which to accept connections"
@@ -50,6 +61,28 @@ variable "instance_type_replica" {
   description = "Instance type to use at replica instance"
   type        = string
   default     = ""
+}
+variable "deletion_protection" {
+  description = "If the DB instance should have deletion protection enabled"
+  type        = bool
+  default     = false
+}
+variable "backup_retention_period" {
+  description = "How long to keep backups for (in days)"
+  type        = number
+  default     = 7
+}
+
+variable "preferred_backup_window" {
+  description = "When to perform DB backups"
+  type        = string
+  default     = "02:00-03:00"
+}
+
+variable "preferred_maintenance_window" {
+  description = "When to perform DB maintenance"
+  type        = string
+  default     = "sun:05:00-sun:06:00"
 }
 
 variable "tags" {
