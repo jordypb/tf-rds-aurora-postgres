@@ -23,7 +23,7 @@ module "aurora" {
   username                        = var.username
   create_random_password          = var.create_random_password
   password                        = var.password
-#  database_name                   = "db${var.name}${var.environment}"
+  database_name                   = var.name
   port                            = var.port
   engine                          = var.engine
   engine_version                  = var.engine_version
