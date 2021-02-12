@@ -43,6 +43,9 @@ module "aurora" {
   #  enabled_cloudwatch_logs_exports = ["audit", "error", "general", "slowquery"]
   security_group_description = ""
 
+  iam_database_authentication_enabled = var.iam_database_authentication_enabled
+  iam_roles                           = var.iam_roles
+
   preferred_maintenance_window = var.preferred_maintenance_window
   preferred_backup_window = var.preferred_backup_window
   backup_retention_period = var.backup_retention_period
