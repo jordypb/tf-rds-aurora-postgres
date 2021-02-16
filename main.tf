@@ -15,11 +15,9 @@ data "aws_vpc" "default" {
 # RDS Aurora
 #############
 module "aurora" {
-#  source                          = "../../"
   source                          = "terraform-aws-modules/rds-aurora/aws"
   version = "~> 3.4.0"
   name                            = var.name
-#  name                            = "${var.name}-${var.environment}"
   username                        = var.username
   create_random_password          = var.create_random_password
   password                        = var.password
@@ -29,7 +27,6 @@ module "aurora" {
   engine_version                  = var.engine_version
 #  subnets                         = data.aws_subnet_ids.all.ids           ####check this dont have subnets values
   subnets                         = var.subnet_ids
-#  subnets                         = data.aws_subnet_ids.all.ids
   publicly_accessible             = var.publicly_accessible
   vpc_id                          = data.aws_vpc.default.id
   replica_count                   = var.replica_count
@@ -44,7 +41,7 @@ module "aurora" {
   security_group_description = ""
 
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
-  iam_roles                           = var.iam_roles
+#  iam_roles                           = var.iam_roles
 
   preferred_maintenance_window = var.preferred_maintenance_window
   preferred_backup_window = var.preferred_backup_window
